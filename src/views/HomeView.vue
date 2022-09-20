@@ -73,7 +73,7 @@ async function getChangeHost () {
   }
 }
 // 获取缓存host
-const linkIp = ref(['101', '102'])
+const linkIp = ref([])
 const linkHost = ref()
 async function getHost() {
   let res = await host()
@@ -93,6 +93,7 @@ async function getFile(item: any) {
 }
 // 保存文件
 async function saveFile() {
+  debugger
   if (!linkHost.value) {
     ElMessage.warning('请选择设备链接地址')
     return
