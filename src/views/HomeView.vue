@@ -93,11 +93,11 @@ async function getFile(item: any) {
 }
 // 保存文件
 async function saveFile() {
-  if (linkHost.value) {
+  if (!linkHost.value) {
     ElMessage.warning('请选择设备链接地址')
     return
   }
-  if (parameter.value) {
+  if (!parameter.value) {
     ElMessage.warning('请填写设备配置文件')
     return
   }
@@ -112,7 +112,7 @@ async function saveFile() {
 }
 // 发送文件
 async function sendFile() {
-  if (linkHost.value) {
+  if (!linkHost.value) {
     ElMessage.warning('请选择设备链接地址')
     return
   }
@@ -126,7 +126,7 @@ async function sendFile() {
 }
 // 发送全部文件
 async function sendAllFile() {
-  if (parameter.value) {
+  if (!parameter.value) {
     ElMessage.warning('请填写设备配置文件')
     return
   }
