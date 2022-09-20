@@ -2,7 +2,7 @@
   <el-container style="width: 80vw;">
     <el-aside>
       <el-collapse v-model="activeNames" @change="handleChange">
-        <el-collapse-item icon="HomeFilled" title="可选设备" name="1">
+        <el-collapse-item icon="HomeFilled" name="1">
           <template #title>
             <el-icon>
               <HomeFilled />
@@ -10,7 +10,7 @@
             可选设备
           </template>
           <div v-for="item in linkIp" :key="item">
-            <el-botton @click="getFile(item)">{{ item }}</el-botton>
+            <el-button style="width:100%" @click="getFile(item)">{{ item }}</el-button>
           </div>
         </el-collapse-item>
       </el-collapse>
@@ -73,12 +73,12 @@ async function getChangeHost () {
   }
 }
 // 获取缓存host
-const linkIp = ref()
+const linkIp = ref(['101', '102'])
 const linkHost = ref()
 async function getHost() {
   let res = await host()
   if (res.data.code === 200) {
-    linkIp.value = res.data.data
+    // linkIp.value = res.data.data
   }
 }
 // 获取文件
