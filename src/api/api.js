@@ -1,7 +1,5 @@
 import request from '@/axios'
 
-const axios = request("http://81.68.125.115:5678")
-
 
 // 查询数据录入列表
 export const inputList = (params) => {

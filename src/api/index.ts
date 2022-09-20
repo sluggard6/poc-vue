@@ -8,7 +8,7 @@ import {
 } from '@/api/url'
 // import { ALL } from 'dns';
 
-const axios = request("http://81.68.125.115:5678")
+const axios = request("http://localhost:5678")
 
 
 // 查询host接口
@@ -43,3 +43,11 @@ export const importEquMonitorPoint = (file: any) => {
         }
     });
 };
+
+export const search = (fileName: string, prop: string, propVaule: string) => {
+    return axios.post('search', {
+        'fileNme' : fileName,
+        'prop' : prop,
+        'propValue' : propVaule
+    })
+}

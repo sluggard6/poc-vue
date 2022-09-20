@@ -9,21 +9,40 @@
             </el-icon>
             可选设备
           </template>
-          <div v-for="item in linkIp" :key="item">
-            <el-button style="width:100%" @click="getFile(item)">{{ item }}</el-button>
+          <div v-for="item in linkIp" :key="item" style="">
+            <el-button style="width:100%" @click="getFile(item)" v-if="item.State==1" type="primary">{{ item.Ip }}</el-button>
+            <el-button style="width:100%" disabled v-else="">{{ item.Ip }}</el-button>
           </div>
         </el-collapse-item>
       </el-collapse>
     </el-aside>
     <el-main class="main">
       <el-row class="mainChild">
-        <el-col :span="3">配置文件位置</el-col>
-        <el-col :span="12">
-          <el-input v-model="routerInput" disabled placeholder="请填写配置文件位置" />
+        <el-col :span="2">配置文件:</el-col>
+        <el-col :span="3">
+          <el-select v-model="fileName">
+            <el-option v-for="f in files"
+              :key="f.path"
+              :value="f.name"
+            />
+          </el-select>
+        </el-col>
+        <el-col :span="2">配置项:</el-col>
+        <el-col :span="3">
+          <el-select v-model="prop">
+            <el-option v-for="p in props"
+              :key="p.key"
+              :value="p.name"
+            />
+          </el-select>
+        </el-col>
+        <el-col :span="2">值过滤:</el-col>
+        <el-col :span="3">
+          <el-input v-model="propValue"></el-input>
         </el-col>
         <el-col :span="2" style="margin-left:5px">
-          <el-button @click="getChangeHost">
-            刷新
+          <el-button @click="serach">
+            查找
           </el-button>
         </el-col>
       </el-row>
@@ -48,7 +67,7 @@
   </el-container>
 </template>
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+
 import {
   scan,
   host,
@@ -56,14 +75,40 @@ import {
   file,
   hostFile,
   allFile,
+  search,
 } from '@/api/index'
-import { onMounted, ref } from "vue";
+import { onMounted, ref, Comment } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 
-onMounted(() => {
+
+onMounted(()=>{
   getHost()
 });
-const routerInput = ref('/etc/poc/config.json')
+
+var fileName: string;
+const files=[
+      {
+        name: "配置文件1",
+        path: "/root/config1.conf"
+      },
+      {
+        name: "配置文件2",
+        paht: "/root/config2.conf"
+      }
+    ];
+var prop: string;
+const props= [
+      {
+        name: "属性1",
+        key: "prop1"
+      },
+      {
+        name: "属性2",
+        key: "prop2"
+      }
+    ];
+var propValue= "";
+
 // 获取host
 async function getChangeHost () {
   parameter.value = null
@@ -77,10 +122,17 @@ const linkIp = ref([])
 const linkHost = ref()
 async function getHost() {
   let res = await host()
-  if (res.data.code === 200) {
-    // linkIp.value = res.data.data
+  if (res.data.code === 0) {
+    linkIp.value = res.data.data
   }
 }
+async function serach() {
+  let res = await search(fileName, prop, propValue)
+  if (res.data.code === 0) {
+    console.log(res.data.data)
+  }
+}
+
 // 获取文件
 const parameter = ref()
 async function getFile(item: any) {
@@ -93,7 +145,6 @@ async function getFile(item: any) {
 }
 // 保存文件
 async function saveFile() {
-  debugger
   if (!linkHost.value) {
     ElMessage.warning('请选择设备链接地址')
     return
