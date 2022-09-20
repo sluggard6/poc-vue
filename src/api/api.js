@@ -1,4 +1,12 @@
-import request from '@/utils/request'
+import request from '@/axios'
+
+const axios = request("http://81.68.125.115:5678")
+
+
+// 查询数据录入列表
+export const inputList = (params) => {
+  return axios.post(INPUT_LIST, params)
+};
 
 export function scan(data) {
   return request({
@@ -7,6 +15,8 @@ export function scan(data) {
     data
   })
 }
+
+
 
 export function getFile(host) {
   return request({

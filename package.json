@@ -13,6 +13,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@element-plus/icons": "^0.0.11",
     "axios": "^0.27.2",
     "element-plus": "^2.2.17",
     "pinia": "^2.0.21",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
+    "@types/axios": "^0.14.0",
     "@types/jsdom": "^20.0.0",
     "@types/node": "^16.11.56",
     "@vitejs/plugin-vue": "^3.0.3",

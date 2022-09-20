@@ -4,11 +4,11 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
+  <!-- <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="You did it!" />a
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -16,23 +16,27 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/login">Login</RouterLink>
       </nav>
     </div>
-  </header>
+  </header> -->
 
-  <RouterView />
+  <RouterView class="borderBox" />
 </template>
 
 <style scoped>
-header {
+  /* .borderBox{
+    height: 100%;
+    width: 100%;
+  } */
+/* header {
   line-height: 1.5;
   max-height: 100vh;
-}
+} */
 
-.logo {
+/* .logo {
   display: block;
   margin: 0 auto 2rem;
-}
+} */
 
-nav {
+/* nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
@@ -55,10 +59,10 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
-}
+} */
 
 @media (min-width: 1024px) {
-  header {
+  /* header {
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
@@ -81,6 +85,6 @@ nav a:first-of-type {
 
     padding: 1rem 0;
     margin-top: 1rem;
-  }
+  } */
 }
 </style>
