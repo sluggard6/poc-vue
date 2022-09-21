@@ -137,7 +137,7 @@ async function getHost() {
   }
 }
 async function serach() {
-  let res = await search(fileName, prop, propValue.value)
+  let res = await search(fileName.value, prop.value, propValue.value)
   if (res.data.code === 0) {
     console.log(res.data.data)
   }
@@ -164,7 +164,10 @@ async function updataValue() {
     prop: prop.value,
     propVale: upValue.value
   }
-  let res = updata(obj)
+  let res = await updata(obj)
+  if (res.data.code === 0) {
+    serach()
+  }
 }
 // 获取文件
 // const parameter = ref()
