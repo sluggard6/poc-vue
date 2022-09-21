@@ -5,7 +5,7 @@ import {
     HOSTS,
     FILE,
     ALLFILE,
-    UPDATA,
+    UPDATE,
 
 } from '@/api/url'
 // import { ALL } from 'dns';
@@ -41,13 +41,13 @@ export const allFile = (params: any) => {
 
 export const search = (fileName: string, prop: string, propVaule: string) => {
     return axios.post('search', {
-        'fileNme' : fileName,
+        'fileName' : fileName,
         'prop' : prop,
         'propValue' : propVaule
     })
 };
 
 // 更新配置
-export const updata = (params: any) => {
-    return axios.post(UPDATA, params);
+export const update = (params: any) => {
+    return axios.post(UPDATE, params);
 };

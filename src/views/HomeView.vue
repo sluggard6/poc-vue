@@ -44,17 +44,17 @@
         <el-col :span="24">
           <el-table :data="tableData" @select="tableSelect" @select-all="tableSelect" border style="width: 100%">
             <el-table-column type="selection" width="55" />
-            <el-table-column prop="ip" label="ip" width="180" />
-            <el-table-column prop="file" label="文件" width="180" />
-            <el-table-column prop="prop" label="配置项" />
-            <el-table-column prop="value" label="当前值" />
+            <el-table-column prop="Host" label="设备ip" width="120" />
+            <el-table-column prop="fileName" label="文件" width="280" />
+            <el-table-column prop="Prop" label="配置项" />
+            <el-table-column prop="Value" label="当前值" />
             <el-table-column prop="propValue" label="过滤值" />
           </el-table>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="15"></el-col>
-        <el-col align="center" :span="2" class="childBox">新的值：</el-col>
+        <el-col align="center" :span="2" class="childBox">输入目标值:</el-col>
         <el-col :span="4">
           <el-input v-model="upValue" />
         </el-col>
@@ -84,7 +84,7 @@ import {
   hostFile,
   allFile,
   search,
-  updata,
+  update,
 } from '@/api/index'
 import { onMounted, ref, Comment } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
@@ -97,22 +97,22 @@ onMounted(() => {
 const fileName = ref()
 const files = ref([
   {
-    name: "配置文件1",
-    path: "/root/config1.conf"
+    name: "/root/config1.properties",
+    path: "/root/config1.properties"
   },
   {
-    name: "配置文件2",
-    paht: "/root/config2.conf"
+    name: "/root/config2.properties",
+    path: "/root/config2.properties"
   }
 ]);
 const prop = ref()
 const props = ref([
   {
-    name: "属性1",
+    name: "prop1",
     key: "prop1"
   },
   {
-    name: "属性2",
+    name: "prop2",
     key: "prop2"
   }
 ]);
@@ -129,7 +129,7 @@ async function getChangeHost() {
   }
 }
 // 获取缓存host
-const linkIp = ref([])
+const linkIp = ref()
 const linkHost = ref()
 async function getHost() {
   let res = await host()
@@ -140,7 +140,14 @@ async function getHost() {
 async function serach() {
   let res = await search(fileName.value, prop.value, propValue.value)
   if (res.data.code === 0) {
-    console.log(res.data.data)
+    //console.log(res.data.data)
+    tableData.value.splice(0, tableData.value.length);
+    for(let d of res.data.data) {
+      console.log(d)
+      d.propValue = propValue
+      d.fileName = fileName
+      tableData.value.push(d as never)
+    }
   }
 }
 // 获取table选中行
@@ -157,16 +164,17 @@ async function updataValue() {
   }
   let ipArr: any[] = []
   tableselction.value.forEach((e:any) => {
-    ipArr.push(e.ip)
+    ipArr.push(e.Host)
   })
   let obj = {
-    host: ipArr,
+    hosts: ipArr,
     fileName: fileName.value,
     prop: prop.value,
-    propVale: upValue.value
+    propValue: upValue.value
   }
-  let res = await updata(obj)
+  let res = await update(obj)
   if (res.data.code === 0) {
+    propValue.value = upValue.value
     serach()
   }
 }
