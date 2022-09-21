@@ -2,7 +2,7 @@
   <el-container style="width: 80vw;">
     <el-aside style="height:100%">
       <el-menu style="height:100%" active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo"
-        default-active="2" text-color="#fff" @open="handleOpen" @close="handleClose">
+        default-active="2" text-color="#fff">
         <el-menu-item-group style="height:6%;" title="Group One">
           <template #title>
             <div style="font-size: 20px;color: white;">
@@ -73,7 +73,7 @@
     </el-main>
   </el-container>
 </template>
-<script setup >
+<script lang="ts" setup >
 
 import {
   scan,
@@ -121,7 +121,7 @@ var propValue = ref();
 const tableData = ref([])
 // 获取host
 async function getChangeHost() {
-  parameter.value = null
+  // parameter.value = null
   let res = await scan()
   if (res.data.code === 200) {
     linkIp.value = res.data.data
@@ -144,7 +144,7 @@ async function serach() {
 }
 // 获取table选中行
 const tableselction = ref([])
-function tableSelect(val) {
+function tableSelect(val: never[]) {
   tableselction.value = val
 }
 // 更新配置数据
@@ -154,9 +154,9 @@ async function updataValue() {
     ElMessage.warning('请选择需要更新的数据')
     return
   }
-  let ipArr = []
-  tableselction.value.forEach((e) => {
-    ipArr.puah(e.ip)
+  let ipArr: any[] = []
+  tableselction.value.forEach((e:any) => {
+    ipArr.push(e.ip)
   })
   let obj = {
     host: ipArr,
@@ -192,33 +192,33 @@ async function saveFile() {
   }
 }
 // 发送文件
-async function sendFile() {
-  if (!linkHost.value) {
-    ElMessage.warning('请选择设备链接地址')
-    return
-  }
-  let obj = {
-    host: linkHost.value
-  }
-  let res = await hostFile(obj)
-  if (res.data.code === 200) {
-    ElMessage.success('发送成功')
-  }
-}
+// async function sendFile() {
+//   if (!linkHost.value) {
+//     ElMessage.warning('请选择设备链接地址')
+//     return
+//   }
+//   let obj = {
+//     host: linkHost.value
+//   }
+//   let res = await hostFile(obj)
+//   if (res.data.code === 200) {
+//     ElMessage.success('发送成功')
+//   }
+// }
 // 发送全部文件
-async function sendAllFile() {
-  if (!parameter.value) {
-    ElMessage.warning('请填写设备配置文件')
-    return
-  }
-  let obj = {
-    file: parameter.value
-  }
-  let res = await allFile(obj)
-  if (res.data.code === 200) {
-    ElMessage.success('发送成功')
-  }
-}
+// async function sendAllFile() {
+//   if (!parameter.value) {
+//     ElMessage.warning('请填写设备配置文件')
+//     return
+//   }
+//   let obj = {
+//     file: parameter.value
+//   }
+//   let res = await allFile(obj)
+//   if (res.data.code === 200) {
+//     ElMessage.success('发送成功')
+//   }
+// }
 </script>
 <style scoped>
 .main {
