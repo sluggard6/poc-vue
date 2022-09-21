@@ -18,19 +18,19 @@
     </el-aside>
     <el-main class="main">
       <el-row class="mainChild">
-        <el-col align="center" :span="2">配置文件:</el-col>
+        <el-col align="center" :span="2"><p class="childBox">配置文件:</p></el-col>
         <el-col :span="3">
           <el-select v-model="fileName">
             <el-option v-for="f in files" :key="f.path" :value="f.name" />
           </el-select>
         </el-col>
-        <el-col align="center" :span="2">配置项:</el-col>
+        <el-col align="center" :span="2"><p class="childBox">配置项:</p></el-col>
         <el-col :span="3">
           <el-select v-model="prop">
             <el-option v-for="p in props" :key="p.key" :value="p.name" />
           </el-select>
         </el-col>
-        <el-col align="center" :span="2">值过滤:</el-col>
+        <el-col align="center" :span="2"><p class="childBox">值过滤:</p></el-col>
         <el-col :span="3">
           <el-input v-model="propValue"></el-input>
         </el-col>
@@ -53,11 +53,12 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="17"></el-col>
+        <el-col :span="15"></el-col>
+        <el-col align="center" :span="2" class="childBox">新的值：</el-col>
         <el-col :span="4">
           <el-input v-model="upValue" />
         </el-col>
-        <el-col :span="2">
+        <el-col :span="2" style="margin-left:5px">
           <el-button @click="updataValue">更新</el-button>
         </el-col>
         <!-- <el-col :span="2">
@@ -231,5 +232,9 @@ async function saveFile() {
 .mainChild {
   width: 60vw;
   margin: 0 0 10px 0;
+}
+
+.childBox {
+  line-height: 4vh;
 }
 </style>

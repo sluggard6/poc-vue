@@ -1,10 +1,11 @@
 import axios, {
-    AxiosRequestConfig,
+    // AxiosRequestConfig,
     AxiosRequestHeaders,
-    AxiosResponse,
+    // AxiosResponse,
 } from "axios";
 import { ElMessage, ElMessageBox } from "element-plus";
 import router from "@/router";
+// let AxiosRequestHeaders = {}
 class HttpService {
     static getAxiosInstance(
         url: string,
@@ -22,8 +23,8 @@ class HttpService {
             timeout,
             headers,
         });
-        instance.interceptors.request.use(this.onRequest, this.onError);
-        instance.interceptors.response.use(this.onResponse, this.onError);
+        // instance.interceptors.request.use(this.onRequest, this.onError);
+        // instance.interceptors.response.use(this.onResponse, this.onError);
         return instance;
     }
 
@@ -39,8 +40,8 @@ class HttpService {
                 // "Access-Control-Allow-Headers": "Content-Type",
             },
         });
-        instance.interceptors.request.use(this.onRequest, this.onError);
-        instance.interceptors.response.use(this.onResponse, this.onError);
+        // instance.interceptors.request.use(this.onRequest, this.onError);
+        // instance.interceptors.response.use(this.onResponse, this.onError);
         return instance;
     }
 
