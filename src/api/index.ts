@@ -4,7 +4,9 @@ import {
     SCAN,
     HOSTS,
     FILE,
-    ALLFILE
+    ALLFILE,
+    UPDATA,
+
 } from '@/api/url'
 // import { ALL } from 'dns';
 
@@ -20,9 +22,9 @@ export const host = () => {
     return axios.get(HOSTS)
 };
 // 获取文件
-export const getHostFile = (parmas:any) => {
-    return axios.get(HOSTS, {parmas:parmas})
-};
+// export const getHostFile = (parmas:any) => {
+//     return axios.get(HOSTS, {parmas:parmas})
+// };
 // 保存文件
 export const file = (parmas: any) => {
     return axios.put(FILE, parmas)
@@ -36,13 +38,6 @@ export const allFile = (params: any) => {
     return axios.post(ALLFILE, params);
 };
 
-export const importEquMonitorPoint = (file: any) => {
-    return axios.put(file, {
-        headers: {
-            "Content-Type": "multipart/form-data"
-        }
-    });
-};
 
 export const search = (fileName: string, prop: string, propVaule: string) => {
     return axios.post('search', {
@@ -50,4 +45,9 @@ export const search = (fileName: string, prop: string, propVaule: string) => {
         'prop' : prop,
         'propValue' : propVaule
     })
-}
+};
+
+// 更新配置
+export const updata = (params: any) => {
+    return axios.post(UPDATA, params);
+};

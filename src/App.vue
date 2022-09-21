@@ -22,10 +22,13 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-  /* .borderBox{
-    height: 100%;
-    width: 100%;
-  } */
+.borderBox {
+  height: 100vh;
+  width: 80vw;
+  border-style: outset;
+  border-width: 4px;
+}
+
 /* header {
   line-height: 1.5;
   max-height: 100vh;
